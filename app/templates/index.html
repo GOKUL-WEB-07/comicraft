@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ComicCraft — AI Comic Story Creator</title>
+  <link rel="stylesheet" href="{{ url_for('static', path='/css/style.css') }}">
+  <script src="{{ url_for('static', path='/js/app.js') }}" defer></script>
+</head>
+<body class="home-page">
+  <main class="home-shell">
+    <header class="masthead"><a class="brand" href="/">ComicCraft<span class="brand-dot">.</span></a><span class="edition">Make a story in five frames</span></header>
+    <div class="home-grid">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-art" aria-hidden="true"><span class="sunburst"></span><span class="hero-bubble">Your story<br>starts here!</span><span class="hero-star">✦</span></div>
+        <p class="kicker">AI Comic Story Creator</p>
+        <h1 id="hero-title">Make your idea a <span>comic.</span></h1>
+        <p class="hero-copy">Turn your imagination into a comic story with AI. Give us a character and a spark; we’ll make five illustrated panels and a PDF to keep.</p>
+        <div class="steps"><span>01 Write</span><span>02 Create</span><span>03 Read</span></div>
+      </section>
+      <section class="form-card" aria-labelledby="form-title">
+        <div class="form-heading"><span class="scribble">✳</span><div><h2 id="form-title">Create your comic</h2><p>Fill in the story details to begin.</p></div></div>
+        <form id="comic-form" action="/generate" method="post">
+          <label for="story_prompt">Story Prompt</label>
+          <textarea id="story_prompt" name="story_prompt" rows="4" minlength="15" maxlength="1000" required placeholder="A brave fox explores an enchanted forest..."></textarea>
+          <span class="field-note">A sentence or two is enough.</span>
+          <label for="character_name">Main Character Name</label>
+          <input id="character_name" name="character_name" type="text" maxlength="60" required placeholder="Fenn">
+          <div class="field-row"><div><label for="setting">Setting</label><select id="setting" name="setting" required><option value="" disabled selected>Choose a setting</option><option>Forest</option><option>School</option><option>Space</option><option>City</option><option>Fantasy Kingdom</option><option>Haunted House</option></select></div><div><label for="tone">Tone</label><select id="tone" name="tone" required><option value="" disabled selected>Choose a tone</option><option>Light-hearted</option><option>Dramatic</option><option>Funny</option><option>Poetic</option><option>Adventure</option><option>Mysterious</option></select></div></div>
+          <label for="art_style">Art Style</label><select id="art_style" name="art_style" required><option value="" disabled selected>Choose an art style</option><option>Comic Book</option><option>Anime</option><option>Pixel Art</option><option>Realistic</option><option>Watercolor</option><option>Cartoon</option></select>
+          <button id="submit-button" class="button button-primary" type="submit">Generate My Comic <span aria-hidden="true">✦</span></button>
+          <div id="loading" class="loading" role="status" aria-live="polite" hidden><span class="spinner" aria-hidden="true"></span><div><strong>Creating your comic...</strong><span id="loading-message">Writing the story...</span></div></div>
+        </form>
+      </section>
+    </div>
+    <footer class="site-footer">Made for stories worth telling <span aria-hidden="true">✦</span> ComicCraft</footer>
+  </main>
+</body>
+</html>

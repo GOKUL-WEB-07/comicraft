@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>{{ comic.comic_title }} — ComicCraft</title><link rel="stylesheet" href="{{ url_for('static', path='/css/style.css') }}"></head>
+<body class="reader-page"><main class="reader-shell">
+  <header class="reader-header"><a class="brand" href="/">ComicCraft<span class="brand-dot">.</span></a><span>Five frames. One story.</span></header>
+  <section class="story-head"><p class="kicker">Your new comic</p><h1>{{ comic.comic_title }}</h1><p>{{ comic.summary }}</p>
+    {% if story_fallback %}<div class="notice">Demo mode: AI service unavailable, using generated sample content.</div>{% endif %}
+    {% if image_fallback %}<div class="notice">Demo mode: image service unavailable, using comic-style placeholder illustrations.</div>{% endif %}
+  </section>
+  <div class="comic-sequence">{% for panel in panels %}<article class="panel-card" aria-labelledby="panel-{{ panel.panel_number }}"><div class="panel-heading"><span class="panel-badge">{{ panel.panel_number }}</span><h2 id="panel-{{ panel.panel_number }}">{{ panel.title }}</h2></div><img class="panel-image" src="{{ panel.image_url }}" alt="Illustration for panel {{ panel.panel_number }}: {{ panel.scene_description }}"><div class="panel-text"><p class="scene">{{ panel.scene_description }}</p><div class="caption"><strong>Narration</strong><p>{{ panel.narration }}</p></div>{% if panel.dialogue %}<div class="dialogue"><strong>{{ panel.dialogue }}</strong></div>{% endif %}<details><summary>View image prompt</summary><p>{{ panel.image_prompt }}</p></details></div></article>{% endfor %}</div>
+  <nav class="reader-actions" aria-label="Comic actions"><a class="button button-primary" href="{{ pdf_url }}" download>Download PDF</a><a class="button button-secondary" href="/">Create Another Comic</a></nav>
+  <footer class="site-footer">The end... for now. <span aria-hidden="true">✦</span> ComicCraft</footer>
+</main></body></html>
